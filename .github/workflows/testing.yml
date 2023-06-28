@@ -18,7 +18,14 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version-file: .python-version
-          cache: 'poetry'
+      
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pypoetry
+          key: pydeps-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            pydeps-${{ runner.os }}-
+            pydeps-
         
       - name: cache deps
         id: cache-deps

@@ -26,6 +26,12 @@ jobs:
           restore-keys: |
             pydeps-${{ runner.os }}-
             pydeps-
+      
+      - uses: snok/install-poetry@v1
+        with:
+          version: 1.5.1
+          virtualenvs-create: true
+          virtualenvs-in-project: true
         
       - name: cache deps
         id: cache-deps

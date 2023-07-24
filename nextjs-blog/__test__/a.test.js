@@ -10,4 +10,8 @@ describe('test', () => {
     it('should return 3', () => {
         expect(3).toBe(3)
     })
+
+    it('should return 4', () => {
+        expect(4).toBe(4)
+    })
 })

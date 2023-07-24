@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'src/**'
+      - 'nextjs-blog/**'
   pull_request:
     branches:
       - main

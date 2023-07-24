@@ -1,0 +1,41 @@
+name: Node Jest CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  test:
+    name: 🧪 Test
+    runs-on: ubuntu-22.04
+    steps:
+      - name: 🔔 Checkout code
+        uses: actions/checkout@v2
+        with:
+          path: nextjs-blog/
+
+      - name: 🛠️ Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.16.1
+
+      - name: 🔍 Cache deps
+        id: cache-deps
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+
+      - name: 📦 Install deps
+        run: npm ci
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+
+      - name: 🧪 Run tests
+        run: npm run test:ci -- --coverage --ci --maxWorkers=2

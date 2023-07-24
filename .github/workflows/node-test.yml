@@ -41,8 +41,7 @@ jobs:
           key: npm-${{ hashFiles('nextjs-blog/package-lock.json') }}
 
       - name: 📦 Install deps
-        working-directory: nextjs-blog
-        run: npm ci
+        run: cd nextjs-blog && npm ci
         if: steps.cache-deps.outputs.cache-hit != 'true'
 
       - name: 🧪 Run tests

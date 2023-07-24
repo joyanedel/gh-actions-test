@@ -17,12 +17,12 @@ jobs:
     runs-on: ubuntu-22.04
     defaults:
       run:
-        working-directory: nextjs-blog/
+        working-directory: nextjs-blog
     steps:
       - name: 🔔 Checkout code
         uses: actions/checkout@v2
         with:
-          path: nextjs-blog/
+          path: nextjs-blog
 
       - name: 🛠️ Setup Node
         uses: actions/setup-node@v2

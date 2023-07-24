@@ -24,6 +24,11 @@ jobs:
         with:
           path: nextjs-blog
 
+      - name: LS
+        run: |
+          ls -la
+          ls -la nextjs-blog
+
       - name: 🛠️ Setup Node
         uses: actions/setup-node@v2
         with:

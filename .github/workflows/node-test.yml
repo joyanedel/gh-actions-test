@@ -27,16 +27,8 @@ jobs:
         with:
           node-version: 18.16.1
 
-      - name: 🔍 Cache deps
-        id: cache-deps
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: npm-${{ hashFiles('package-lock.json') }}
-
       - name: 📦 Install deps
         run: npm ci
-        if: steps.cache-deps.outputs.cache-hit != 'true'
 
       - name: 🧪 Run tests
         run: npm run test:ci -- --coverage --ci --maxWorkers=2

@@ -27,7 +27,6 @@ jobs:
       - name: LS
         run: |
           ls -la
-          ls -la nextjs-blog
 
       - name: 🛠️ Setup Node
         uses: actions/setup-node@v2
@@ -39,11 +38,12 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: npm-${{ hashFiles('package-lock.json') }}
+          key: npm-${{ hashFiles('nextjs-blog/package-lock.json') }}
 
       - name: 📦 Install deps
+        working-directory: nextjs-blog
         run: npm ci
         if: steps.cache-deps.outputs.cache-hit != 'true'
 
       - name: 🧪 Run tests
-        run: npm run test:ci -- --coverage --ci --maxWorkers=2
+        run: cd nextjs-blog && npm run test:ci -- --coverage --ci --maxWorkers=2

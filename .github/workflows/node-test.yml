@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'nextjs-blog/**'
+      - '.github/workflows/node-test.yml'
   pull_request:
     branches:
       - main
@@ -29,6 +30,7 @@ jobs:
 
       - name: Caching deps
         uses: actions/cache@v3
+        id: cache-node-modules
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
@@ -36,6 +38,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: 📦 Install deps
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 🧪 Run tests
